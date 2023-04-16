@@ -15,7 +15,7 @@ def get_colour(i):
 def get_name(i):
     return ''
 
-def render_template_image(coords, width, height):
+def render_template_image(coords, width, height, box_width):
 
     filename="template.png"
     img = Image.new('RGBA', (width, height), (0, 0, 0, 0))
@@ -37,19 +37,19 @@ def render_template_image(coords, width, height):
         y4 = height - y4 * height
 
         # create box polygon
-        poly = [(x1 * width, y1), (x2 * width, y2), (x4 * width, y4), (x3 * width, y3)]
+        poly = [(x1 * width, y1), (x2 * width - box_width, y2), (x4 * width - box_width, y4 - box_width), (x3 * width, y3 - box_width)]
 
         # draw box polygon
-        draw.polygon(poly, outline=get_colour(i), width=3)
+        draw.polygon(poly, outline=get_colour(i), width=box_width)
 
     # save image
     img.save(filename)
     
-def render_template_labels(coords, width, height):
+def render_template_labels(coords, width, height, font_sz):
     filename="template_labels.png"
     img = Image.new('RGBA', (width, height), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype('arial.ttf', 22) # create font instance with size 24
+    font = ImageFont.truetype('arial.ttf', font_sz) # create font instance with size 24
     for i, box in enumerate(coords):
         # extract corner coordinates
         x1, x2, x3, x4, y1, y2, y3, y4 = box[1:]

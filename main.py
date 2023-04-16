@@ -4,8 +4,8 @@ from render import render_template_image, render_template_labels
 from plot import render
 from conversions import *
 from bank_template import bank_template
-height=1536
-width=1536
+height=1024
+width=1024
 input_filename = "PC_Generic_1280.bnk.template"
 output_filename = "PC_Generic_1280.bnk"
 
@@ -30,9 +30,9 @@ def main(filename):
                 print(data)
                 dash_objects.append(data)
     
-    render(dash_objects)
-    render_template_image(dash_objects, width, height)
-    render_template_labels(dash_objects, width, height)
+    #render(dash_objects)
+    render_template_image(dash_objects, width, height, 1)
+    render_template_labels(dash_objects, width, height, 14)
     #print("===========converted: \n")
     #for i in range(len(dash_objects)):
     #    print(convert_to_4(dash_objects[i]))
